@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 1069682717}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 1807521509}
   m_Layer: 0
   m_Name: Skin
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,8 +406,8 @@ Transform:
   m_GameObject: {fileID: 1807521506}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.54, y: -0.29, z: 0}
-  m_LocalScale: {x: 4.9434, y: 4.307173, z: 1}
+  m_LocalPosition: {x: 0.17, y: -0.28, z: 0}
+  m_LocalScale: {x: 5.0491886, y: 4.307173, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 118699873}
@@ -560,6 +560,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
+  jumpForce: 6
+  maxJumps: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
