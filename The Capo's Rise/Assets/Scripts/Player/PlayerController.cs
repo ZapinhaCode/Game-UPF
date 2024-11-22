@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool jumpRequested;
     private Animator anim;
-    private bool isShooting = false; // Variável para controlar o estado de tiro
+    private bool isShooting = false;
 
     public float speed;
     public float jumpForce;
     public int maxJumps = 1;
+    public GameObject bullet;
+    public Transform firePoint;
 
     void Start()
     {
@@ -45,16 +47,15 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if (isShooting) // Check if the character is shooting
+        if (isShooting)
         {
-            rb.velocity = new Vector2(0, rb.velocity.y); // Stop horizontal movement
-            anim.SetBool("IsRun", false); // Ensure running animation is off
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            anim.SetBool("IsRun", false);
             return;
         }
 
         rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
 
-        // Handle character orientation and running animation
         if (moveX > 0)
         {
             transform.eulerAngles = new Vector3(0f, 0f, 0f);
@@ -92,16 +93,18 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-        isShooting = true; // O personagem está atirando
+        isShooting = true;
         anim.Play("Shoot", -1);
         StartCoroutine(ShootingCoroutine());
         anim.SetBool("IsRun", false);
+        
+        Instantiate(bullet,firePoint.transform.position, firePoint.transform.rotation );
     }
 
     IEnumerator ShootingCoroutine()
     {
-        yield return new WaitForSeconds(0.2f); // Duração da animação de tiro
-        isShooting = false; // O personagem terminou de atirar
+        yield return new WaitForSeconds(0.2f);
+        isShooting = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
