@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public int maxJumps = 1;
     public GameObject bullet;
     public Transform firePoint;
+    public int life;
+    public TextMeshProUGUI textLife;
 
     void Start()
     {
@@ -37,6 +40,8 @@ public class PlayerController : MonoBehaviour
         {
             Shoot();
         }
+        
+        textLife.text = life.ToString();
     }
 
     void FixedUpdate()
