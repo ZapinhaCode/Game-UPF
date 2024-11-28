@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 73f02aa86c0378e4b9fc95bb5bae761c
+guid: 1f7972477a4fb59429374d929d4089f9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b808812575703347a879feed5f1c560
-      internalID: 1493645555
+      spriteID: 29c11a5620ebdab4c847d19b416d000e
+      internalID: -1157445920
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 232b42358f9d0964ea38edf0563809e5
-      internalID: 1596964721
+      spriteID: edffc79af54b19e41b8aff9f32a64010
+      internalID: -1714398521
       vertices: []
       indices: 
       edges: []
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cfb44783559c9a4ca9d63b0ac790e93
-      internalID: 205947554
+      spriteID: 1b5fc43025163864280d665ae826bb05
+      internalID: 813982435
       vertices: []
       indices: 
       edges: []
@@ -187,8 +187,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95c566e49fbbdcf429037291c682aabc
-      internalID: -2030728022
+      spriteID: 7d7d81c65f5908e49afc102ad142eadc
+      internalID: 795830398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dead_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44683fcbb13390c4f941c53ab4bdd75b
+      internalID: 25582791
       vertices: []
       indices: 
       edges: []
@@ -204,10 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Dead_0: 1493645555
-      Dead_1: 1596964721
-      Dead_2: 205947554
-      Dead_3: -2030728022
+      Dead_0: -1157445920
+      Dead_1: -1714398521
+      Dead_2: 813982435
+      Dead_3: 795830398
+      Dead_4: 25582791
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

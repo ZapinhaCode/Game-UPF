@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0dddd29d0c56d044eb82e9501d2415af
+guid: 593a78526b53d4c4f92e5f5911c7f682
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shot_2_0
+      name: Shot_1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5648773b61a93443bbf5e5831db1cd1
-      internalID: 1220637176
+      spriteID: e687eeae9c5824f4fb40e05f59025676
+      internalID: 746729321
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shot_2_1
+      name: Shot_1_1
       rect:
         serializedVersion: 2
         x: 128
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 202e3c9820a056b4aa0a0df68dca9340
-      internalID: 1958223538
+      spriteID: be421c24bab2b0742b7f8d05dc953492
+      internalID: -602761149
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shot_2_2
+      name: Shot_1_2
       rect:
         serializedVersion: 2
         x: 256
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22c4e33434901474aa9cdd4a53727cb3
-      internalID: -1674693386
+      spriteID: 2f64d28a31e1d3746a3a217c4f72736f
+      internalID: -120121037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shot_2_3
+      name: Shot_1_3
       rect:
         serializedVersion: 2
         x: 384
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03991ba2c5f8a554ca5ec3a6403e1419
-      internalID: 1469542228
+      spriteID: a606b84ad18b20e42a3561ca070e2814
+      internalID: -1752808211
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Shot_2_0: 1220637176
-      Shot_2_1: 1958223538
-      Shot_2_2: -1674693386
-      Shot_2_3: 1469542228
+      Shot_1_0: 746729321
+      Shot_1_1: -602761149
+      Shot_1_2: -120121037
+      Shot_1_3: -1752808211
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
