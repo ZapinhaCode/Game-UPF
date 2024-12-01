@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5900476230065935667}
   m_Layer: 0
-  m_Name: Enemy_2
+  m_Name: Enemy2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 1058478335257167702}
   - component: {fileID: 816988670450105067}
   m_Layer: 0
-  m_Name: Skin_2
+  m_Name: Skin2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,8 +61,8 @@ Transform:
   m_GameObject: {fileID: 9162148056817835057}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.74, y: 3.18, z: 0.09491034}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: 11.81, y: -3.42, z: 0.09491034}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5900476230065935667}
@@ -107,7 +107,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1141134469, guid: 9a1df8db646008a4b9e040eb3d41000f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

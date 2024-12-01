@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
     private int currentJumps;
     private bool isGrounded;
     private bool jumpRequested;
-    private Animator anim;
     private bool isShooting = false;
+    private bool isDead = false;
 
     public float speed;
     public float jumpForce;
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
     public int life;
     public TextMeshProUGUI textLife;
+    public Animator anim;
 
     void Start()
     {
@@ -42,6 +43,8 @@ public class PlayerController : MonoBehaviour
         }
         
         textLife.text = life.ToString();
+        
+        DeadState();
     }
 
     void FixedUpdate()
@@ -129,4 +132,14 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
+    
+    void DeadState()
+    {
+        if (life <= 0)
+        { 
+            enabled = false; // Desativa o PlayerController
+            anim.SetBool("IsDie", true);
+            Destroy(gameObject, 1.8f); // Destroi o objeto após 1 segundo
+        }
+    } 
 }
