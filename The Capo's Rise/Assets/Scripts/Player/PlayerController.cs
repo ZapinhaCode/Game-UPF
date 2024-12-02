@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool jumpRequested;
     private bool isShooting = false;
-    private bool isDead = false;
 
     public float speed;
     public float jumpForce;
@@ -21,7 +20,8 @@ public class PlayerController : MonoBehaviour
     public int life;
     public TextMeshProUGUI textLife;
     public Animator anim;
-
+    public GameObject gameOverCanvas;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -136,10 +136,21 @@ public class PlayerController : MonoBehaviour
     void DeadState()
     {
         if (life <= 0)
-        { 
+        {
             enabled = false; // Desativa o PlayerController
             anim.SetBool("IsDie", true);
-            Destroy(gameObject, 1.8f); // Destroi o objeto após 1 segundo
+            StartCoroutine(ShowGameOverAfterDelay(1.7f));
         }
-    } 
+    }
+
+    IEnumerator ShowGameOverAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); // Aguarda o tempo especificado
+
+        // Exibe o Canvas de Game Over
+        if (gameOverCanvas != null)
+        {
+            gameOverCanvas.SetActive(true);
+        }
+    }
 }
