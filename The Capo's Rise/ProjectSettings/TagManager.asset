@@ -49,3 +49,12 @@ TagManager:
   - name: Player
     uniqueID: 812996079
     locked: 0
+  - name: BackGround
+    uniqueID: 2275195171
+    locked: 0
+  - name: ForGround
+    uniqueID: 2617842003
+    locked: 0
+  - name: Objects
+    uniqueID: 1599321003
+    locked: 0
