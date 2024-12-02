@@ -20,4 +20,12 @@ public class GameController : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void ScoreFinalLevel()
+    {
+        // Exibir
+        // Vida total
+        // Tempo de jogo
+        // Inimigos derrotados
+    }
 }

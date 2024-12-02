@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool jumpRequested;
     private bool isShooting = false;
+    private bool wasMoving = false;
 
     public float speed;
     public float jumpForce;
@@ -20,8 +21,15 @@ public class PlayerController : MonoBehaviour
     public int life;
     public TextMeshProUGUI textLife;
     public Animator anim;
+    
     public GameObject gameOverCanvas;
-    public GameObject deathSoundPrefab;    
+    public GameObject deathSoundPrefab;
+    public GameObject RunSongPrefab;
+    public GameObject JumpSongPrefab;
+    public GameObject GunShootSongPlayerPrefab;
+    public GameObject LevelFailSongPrefab;
+    public GameObject MusicScene;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -52,7 +60,6 @@ public class PlayerController : MonoBehaviour
         Move();
         HandleJump();
     }
-
     void Move()
     {
         if (isShooting)
@@ -64,22 +71,46 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
 
+        // Se o jogador começa a se mover (moveX != 0) e não estava movendo antes
+        if (moveX != 0 && !wasMoving)
+        {
+            wasMoving = true;  // Marca que o jogador começou a se mover
+            anim.SetBool("IsRun", true);
+
+            // Instancia o som de passos
+            if (RunSongPrefab != null)
+            {
+                // Instancia o prefab de som na posição do jogador
+                GameObject soundEffect = Instantiate(RunSongPrefab, transform.position, Quaternion.identity);
+
+                // Verifica se o prefab tem um AudioSource e toca o som
+                AudioSource audioSource = soundEffect.GetComponent<AudioSource>();
+                if (audioSource != null)
+                {
+                    audioSource.Play();
+
+                    // Destroi o GameObject do som após a duração do áudio
+                    Destroy(soundEffect, audioSource.clip.length);
+                }
+            }
+        }
+        else if (moveX == 0)
+        {
+            anim.SetBool("IsRun", false);
+            wasMoving = false;  // Marca que o jogador parou de se mover
+        }
+
+        // Verifica se o jogador está se movendo para a direita ou para a esquerda
         if (moveX > 0)
         {
             transform.eulerAngles = new Vector3(0f, 0f, 0f);
-            anim.SetBool("IsRun", true);
         }
         else if (moveX < 0)
         {
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
-            anim.SetBool("IsRun", true);
-        }
-        else
-        {
-            anim.SetBool("IsRun", false);
         }
     }
-
+    
     void HandleJump()
     {
         if (jumpRequested && !isShooting)
@@ -97,6 +128,22 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         anim.SetBool("IsJump", true);
+        
+        if (JumpSongPrefab != null)
+        {
+            // Instancia o prefab de som na posição do jogador
+            GameObject soundEffect = Instantiate(JumpSongPrefab, transform.position, Quaternion.identity);
+            
+            // Verifica se o prefab tem um AudioSource e toca o som
+            AudioSource audioSource = soundEffect.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+
+            // Destroi o GameObject do som após a duração do áudio
+            Destroy(soundEffect, audioSource != null ? audioSource.clip.length : 1f);
+        }
     }
 
     void Shoot()
@@ -105,6 +152,22 @@ public class PlayerController : MonoBehaviour
         anim.Play("Shoot", -1);
         StartCoroutine(ShootingCoroutine());
         anim.SetBool("IsRun", false);
+        
+        if (GunShootSongPlayerPrefab != null)
+        {
+            // Instancia o prefab de som na posição do jogador
+            GameObject soundEffect = Instantiate(GunShootSongPlayerPrefab, transform.position, Quaternion.identity);
+            
+            // Verifica se o prefab tem um AudioSource e toca o som
+            AudioSource audioSource = soundEffect.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+
+            // Destroi o GameObject do som após a duração do áudio
+            Destroy(soundEffect, audioSource != null ? audioSource.clip.length : 1f);
+        }
         
         Instantiate(bullet,firePoint.transform.position, firePoint.transform.rotation );
     }
@@ -157,7 +220,7 @@ public class PlayerController : MonoBehaviour
                 Destroy(soundEffect, audioSource != null ? audioSource.clip.length : 1f);
             }
             
-            StartCoroutine(ShowGameOverAfterDelay(1.7f));
+            StartCoroutine(ShowGameOverAfterDelay(1.6f));
         }
     }
 
@@ -168,6 +231,24 @@ public class PlayerController : MonoBehaviour
         if (gameOverCanvas != null)
         {
             gameOverCanvas.SetActive(true);
+            
+            // Toca o som manualmente, verificando se o prefab de som contém um AudioSource
+            if (LevelFailSongPrefab != null)
+            {
+                // Instancia o prefab de som na posição do jogador
+                GameObject soundEffect = Instantiate(LevelFailSongPrefab, transform.position, Quaternion.identity);
+            
+                // Verifica se o prefab tem um AudioSource e toca o som
+                AudioSource audioSource = soundEffect.GetComponent<AudioSource>();
+                if (audioSource != null)
+                {
+                    audioSource.Play();
+                }
+
+                // Destroi o GameObject do som após a duração do áudio
+                Destroy(MusicScene);
+                Destroy(soundEffect, audioSource != null ? audioSource.clip.length : 1f);
+            }
         }
     }
 }
