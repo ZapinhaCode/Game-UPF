@@ -39,7 +39,7 @@ Objetivo: O objetivo principal é completar cada nível superando os inimigos e 
 - **Layout Balanceado:** Combinação de seções de combate e plataforma.
 
 
-## 2. **Nível 2 - Difícil**
+## 3. **Nível 2 - Difícil**
 - **Objetivo:** Desafiar jogadores com inimigos mais difíceis.
 
 - **Características:**
@@ -69,7 +69,7 @@ Objetivo: O objetivo principal é completar cada nível superando os inimigos e 
 - **Comportamento:** Move-se rapidamente em direção ao jogador e atira nele
 - **Saúde:** Alta.
 
-### 3. Chefe
+### 4. Chefe
 - **Comportamento:** Move-se rapidamente em direção ao jogador e atira nele
 - **Saúde:** Alta x2.
 
@@ -106,6 +106,8 @@ Objetivo: O objetivo principal é completar cada nível superando os inimigos e 
 ## 2. Mixer de Áudio (Audio Mixer).
 ## 3. Triggers de Áudio.
 ## 4. Controle da câmera no personagem (Cinemachine).
+## 5. Controle do personagem e dos inimigos com o cenário (RigidBody 2d)
+## 6. Colisor do persoangem e dos inimigos (Capsule Collider 2d)
 
 # Vídeo de Demo
 - **Anexado a este projeto contém um vídeo explicando uma pequena demo do jogo explicado por mim mesmo (Bernardo Zaparoli) as funcionalidades do jogo, itens e inimigos presentes no jogo**
