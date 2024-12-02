@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI textLife;
     public Animator anim;
     public GameObject gameOverCanvas;
-    
+    public GameObject deathSoundPrefab;    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         
         textLife.text = life.ToString();
         
-        DeadState();
+        DeadState(deathSoundPrefab);
     }
 
     void FixedUpdate()
@@ -133,12 +133,30 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    void DeadState()
+    void DeadState(GameObject deathSoundPrefab)
     {
         if (life <= 0)
         {
             enabled = false; // Desativa o PlayerController
             anim.SetBool("IsDie", true);
+            
+            // Toca o som manualmente, verificando se o prefab de som contém um AudioSource
+            if (deathSoundPrefab != null)
+            {
+                // Instancia o prefab de som na posição do jogador
+                GameObject soundEffect = Instantiate(deathSoundPrefab, transform.position, Quaternion.identity);
+            
+                // Verifica se o prefab tem um AudioSource e toca o som
+                AudioSource audioSource = soundEffect.GetComponent<AudioSource>();
+                if (audioSource != null)
+                {
+                    audioSource.Play();
+                }
+
+                // Destroi o GameObject do som após a duração do áudio
+                Destroy(soundEffect, audioSource != null ? audioSource.clip.length : 1f);
+            }
+            
             StartCoroutine(ShowGameOverAfterDelay(1.7f));
         }
     }
@@ -147,7 +165,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay); // Aguarda o tempo especificado
 
-        // Exibe o Canvas de Game Over
         if (gameOverCanvas != null)
         {
             gameOverCanvas.SetActive(true);

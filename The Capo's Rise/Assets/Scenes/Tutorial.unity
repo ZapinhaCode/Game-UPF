@@ -60676,6 +60676,7 @@ MonoBehaviour:
   life: 3
   textLife: {fileID: 172835398}
   anim: {fileID: 0}
+  gameOverCanvas: {fileID: 2100949322}
 --- !u!1 &2100949322
 GameObject:
   m_ObjectHideFlags: 0
@@ -60694,7 +60695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2100949323
 MonoBehaviour:
   m_ObjectHideFlags: 0
