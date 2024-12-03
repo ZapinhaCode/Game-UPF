@@ -23,12 +23,14 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     
     public GameObject gameOverCanvas;
+    public GameObject gameWinCanvas;
     public GameObject deathSoundPrefab;
     public GameObject RunSongPrefab;
     public GameObject JumpSongPrefab;
     public GameObject GunShootSongPlayerPrefab;
     public GameObject LevelFailSongPrefab;
     public GameObject MusicScene;
+    public GameObject winSongPrefab;
     
     void Start()
     {
@@ -185,6 +187,31 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             currentJumps = maxJumps;
             anim.SetBool("IsJump", false);
+        }
+        else if (collision.gameObject.CompareTag("Finish"))
+        {
+            if (gameWinCanvas != null)
+            {
+                gameWinCanvas.SetActive(true);
+            
+                // Toca o som manualmente, verificando se o prefab de som contém um AudioSource
+                if (winSongPrefab != null)
+                {
+                    // Instancia o prefab de som na posição do jogador
+                    GameObject soundEffect = Instantiate(winSongPrefab, transform.position, Quaternion.identity);
+            
+                    // Verifica se o prefab tem um AudioSource e toca o som
+                    AudioSource audioSource = soundEffect.GetComponent<AudioSource>();
+                    if (audioSource != null)
+                    {
+                        audioSource.Play();
+                    }
+
+                    // Destroi o GameObject do som após a duração do áudio
+                    Destroy(MusicScene);
+                    Destroy(soundEffect, audioSource != null ? audioSource.clip.length : 1f);
+                }
+            }
         }
     }
 
