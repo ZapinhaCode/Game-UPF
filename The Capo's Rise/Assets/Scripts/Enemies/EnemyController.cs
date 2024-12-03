@@ -140,7 +140,7 @@ public class EnemyController : MonoBehaviour
         {
             if (anim != null)
             {
-                anim.Play("Shoot", -1);
+                anim.Play("Shot", -1);
                 Invoke("StopShot", 0.5f); // Ajuste o tempo conforme a duração da animação
             }
 
