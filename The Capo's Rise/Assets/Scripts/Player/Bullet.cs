@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
             if(enemyHealth != null)
             {
                 // Aplica o dano ao inimigo
-                enemyHealth.TakeDamage(damage);
+                // enemyHealth.TakeDamage(damage);
             }
 
             // Destroi a bala após causar dano
