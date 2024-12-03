@@ -27,12 +27,17 @@ public class EnemyController : MonoBehaviour
     private float ultimoDisparo = 0f;
 
     [Header("Configurações de Vida")]
-    public int Life = 1;
+    public int life;
+
+    public GameObject GunShootSongEnemyPrefab;
+    public GameObject deathSoundPrefab;
 
     private Rigidbody2D rb;
 
     void Start()
     {
+        anim.SetBool("IsRun", false);
+        anim.Play("Idle", -1);
         rb = GetComponent<Rigidbody2D>();
 
         // Verifica se o Animator está atribuído
@@ -62,7 +67,6 @@ public class EnemyController : MonoBehaviour
             if (jogadorEncontrado != null)
             {
                 jogador = jogadorEncontrado;
-                // Removido: Shot();
             }
             else
             {
@@ -145,6 +149,22 @@ public class EnemyController : MonoBehaviour
             {
                 anim.Play("Shot", -1);
                 Invoke("StopShot", 0.5f); // Ajuste o tempo conforme a duração da animação
+                
+                if (GunShootSongEnemyPrefab != null)
+                {
+                    // Instancia o prefab de som na posição do jogador
+                    GameObject soundEffect = Instantiate(GunShootSongEnemyPrefab, transform.position, Quaternion.identity);
+            
+                    // Verifica se o prefab tem um AudioSource e toca o som
+                    AudioSource audioSource = soundEffect.GetComponent<AudioSource>();
+                    if (audioSource != null)
+                    {
+                        audioSource.Play();
+                    }
+
+                    // Destroi o GameObject do som após a duração do áudio
+                    Destroy(soundEffect, audioSource != null ? audioSource.clip.length : 1f);
+                }
             }
 
             // Instanciar a bala
@@ -185,11 +205,36 @@ public class EnemyController : MonoBehaviour
             anim.SetBool("IsRun", true);
         }
     }
-    
-    public void TakeDamage(int damage)
+    void OnTriggerEnter2D(Collider2D colisao)
     {
-        Life -= damage;
-        if (Life <= 0)
+        if (colisao.CompareTag("BulletPlayer"))
+        {
+            anim.SetBool("IsRun", false);
+            anim.SetTrigger("TakeDamage");
+            TakeDamage();
+        }
+    }
+
+    public void TakeDamage()
+    {
+        if (deathSoundPrefab != null)
+        {
+            // Instancia o prefab de som na posição do jogador
+            GameObject soundEffect = Instantiate(deathSoundPrefab, transform.position, Quaternion.identity);
+            
+            // Verifica se o prefab tem um AudioSource e toca o som
+            AudioSource audioSource = soundEffect.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+
+            // Destroi o GameObject do som após a duração do áudio
+            Destroy(soundEffect, audioSource != null ? audioSource.clip.length : 1f);
+        }
+        
+        life -= 1;
+        if (life <= 0)
         {
             Die();
         }
@@ -197,31 +242,27 @@ public class EnemyController : MonoBehaviour
 
     void Die()
     {
-        // Executa a animação de morte, efeitos visuais, etc.
-        Destroy(gameObject);
-    }
-    
-    void OnTriggerEnter2D(Collider2D colisao)
-    {
-        if (colisao.CompareTag("BulletPlayer"))
+        enabled = false; // Desativa o PlayerController
+        anim.SetBool("IsDie", true);
+            
+        // Toca o som manualmente, verificando se o prefab de som contém um AudioSource
+        if (deathSoundPrefab != null)
         {
-            Debug.Log("Acertou" + colisao.name);
-            anim.SetTrigger("TakeDamage");
-            TakeDamage(1); // Ajuste o valor do dano conforme necessário
-        }
-    }
-    
-    void OnCollisionEnter2D(Collision2D collision)
-    {
+            // Instancia o prefab de som na posição do jogador
+            GameObject soundEffect = Instantiate(deathSoundPrefab, transform.position, Quaternion.identity);
+            
+            // Verifica se o prefab tem um AudioSource e toca o som
+            AudioSource audioSource = soundEffect.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
 
-        // Verifica se o objeto colidido possui a tag "Enemy"
-        if (collision.gameObject.CompareTag("PlayerBullet"))
-        {
-            Debug.Log("Acertou");
-
-            // Tenta obter o componente EnemyHealth do inimigo
-            Destroy(gameObject);
+            // Destroi o GameObject do som após a duração do áudio
+            Destroy(soundEffect, audioSource != null ? audioSource.clip.length : 1f);
         }
+        
+        Destroy(gameObject, 2.1f);
     }
 
     void OnDrawGizmosSelected()

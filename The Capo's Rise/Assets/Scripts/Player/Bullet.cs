@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float Speed = 10f;           // Velocidade da bala
-    public int damage = 1;             // Dano que a bala causa
-
+    public float Speed = 10f;
+    
     void Start()
     {
         // Destroi a bala após 3 segundos para evitar acumulação
@@ -23,9 +22,6 @@ public class Bullet : MonoBehaviour
     {        
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            EnemyController enemyController = collision.GetComponent<EnemyController>();
-            enemyController.Life--;
-            enemyController.anim.SetTrigger("TakeDamage");
             Destroy(gameObject);
         }
     }

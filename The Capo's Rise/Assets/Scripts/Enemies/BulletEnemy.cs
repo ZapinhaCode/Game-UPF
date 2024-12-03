@@ -5,8 +5,8 @@ using UnityEngine;
 public class BulletEnemy : MonoBehaviour
 {
     public float Speed = 10f;           // Velocidade da bala
-    public int damage = 1;             // Dano que a bala causa
-
+    public GameObject HurtSong;
+    
     void Start()
     {
         // Destroi a bala após 3 segundos para evitar acumulação
@@ -28,6 +28,22 @@ public class BulletEnemy : MonoBehaviour
             Destroy(gameObject);
             
             playerController.anim.SetTrigger("TakeDamage");
+            
+            if (HurtSong != null)
+            {
+                // Instancia o prefab de som na posição do jogador
+                GameObject soundEffect = Instantiate(HurtSong, transform.position, Quaternion.identity);
+
+                // Verifica se o prefab tem um AudioSource e toca o som
+                AudioSource audioSource = soundEffect.GetComponent<AudioSource>();
+                if (audioSource != null)
+                {
+                    audioSource.Play();
+
+                    // Destroi o GameObject do som após a duração do áudio
+                    Destroy(soundEffect, audioSource.clip.length);
+                }
+            }
         }
     }
 }
