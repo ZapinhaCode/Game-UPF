@@ -203,9 +203,9 @@ public class EnemyController : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D colisao)
     {
-        // Debug.Log("Acertou" + colisao.name);
-        if (colisao.CompareTag("PlayerBullet"))
+        if (colisao.CompareTag("BulletPlayer"))
         {
+            Debug.Log("Acertou" + colisao.name);
             anim.SetTrigger("TakeDamage");
             TakeDamage(1); // Ajuste o valor do dano conforme necessário
         }

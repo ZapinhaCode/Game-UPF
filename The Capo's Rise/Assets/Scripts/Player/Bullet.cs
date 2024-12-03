@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float Speed = 10f;           // Velocidade da bala
-    public int damage = 20;             // Dano que a bala causa
+    public int damage = 1;             // Dano que a bala causa
 
     void Start()
     {
@@ -20,11 +20,13 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    {        
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Acertou Inimigo");
-
+            EnemyController enemyController = collision.GetComponent<EnemyController>();
+            enemyController.Life--;
+            enemyController.anim.SetTrigger("TakeDamage");
+            Destroy(gameObject);
         }
     }
 }

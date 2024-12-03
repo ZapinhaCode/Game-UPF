@@ -25,6 +25,9 @@ public class BulletEnemy : MonoBehaviour
         {
             PlayerController playerController = collision.GetComponent<PlayerController>();
             playerController.life--;
+            Destroy(gameObject);
+            
+            playerController.anim.SetTrigger("TakeDamage");
         }
     }
 }
