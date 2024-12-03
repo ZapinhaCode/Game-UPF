@@ -104643,16 +104643,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e16aeba2b1e87b341ae0c87035cfb303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidade: 3
-  distanciaDeteccao: 6
+  velocidade: 6
+  distanciaDeteccao: 8
   jogador: {fileID: 1996004407}
   visualizarDeteccao: 1
   anim: {fileID: 1733466887}
   spriteRenderer: {fileID: 1733466888}
   firePoint: {fileID: 1733466885}
   bullet: {fileID: 4521637155089880150, guid: 649c751c874697b49b328d4fec8f0099, type: 3}
-  tempoEntreDisparos: 2
-  life: 8
+  tempoEntreDisparos: 1
+  life: 20
   GunShootSongEnemyPrefab: {fileID: 1501423897}
   deathSoundPrefab: {fileID: 1501423898}
 --- !u!1001 &1761611184
