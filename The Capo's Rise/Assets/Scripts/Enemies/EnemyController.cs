@@ -19,6 +19,12 @@ public class EnemyController : MonoBehaviour
 
     [Header("Referência ao SpriteRenderer")]
     public SpriteRenderer spriteRenderer;
+    
+    [Header("Configurações de Disparo")]
+    public Transform firePoint;
+    public GameObject bullet;
+    public float tempoEntreDisparos = 2.0f; // Tempo em segundos entre os disparos
+    private float ultimoDisparo = 0f;
 
     private Rigidbody2D rb;
 
@@ -53,6 +59,7 @@ public class EnemyController : MonoBehaviour
             if (jogadorEncontrado != null)
             {
                 jogador = jogadorEncontrado;
+                // Removido: Shot();
             }
             else
             {
@@ -79,6 +86,9 @@ public class EnemyController : MonoBehaviour
 
                 // Vira o inimigo na direção do jogador
                 VirarParaJogador(jogador.transform.position);
+
+                // Chama o método de atirar
+                Shot();
             }
             else
             {
@@ -88,6 +98,8 @@ public class EnemyController : MonoBehaviour
                 if (anim != null)
                 {
                     anim.SetBool("IsRun", false);
+                    // Para a animação de tiro
+                    StopShot();
                 }
             }
         }
@@ -97,6 +109,8 @@ public class EnemyController : MonoBehaviour
             if (anim != null)
             {
                 anim.SetBool("IsRun", false);
+                // Para a animação de tiro
+                StopShot();
             }
         }
     }
@@ -117,6 +131,55 @@ public class EnemyController : MonoBehaviour
         else if (posicaoJogador.x < transform.position.x && !spriteRenderer.flipX)
         {
             spriteRenderer.flipX = true;
+        }
+    }
+
+    void Shot()
+    {
+        if (Time.time >= ultimoDisparo + tempoEntreDisparos)
+        {
+            if (anim != null)
+            {
+                anim.Play("Shoot", -1);
+                Invoke("StopShot", 0.5f); // Ajuste o tempo conforme a duração da animação
+            }
+
+            // Instanciar a bala
+            if (firePoint != null && bullet != null && jogador != null)
+            {
+                // Calcular a direção para o jogador
+                Vector3 direcao = (jogador.transform.position - firePoint.position).normalized;
+
+                // Calcular o ângulo para a rotação da bala
+                float angulo = Mathf.Atan2(direcao.y, direcao.x) * Mathf.Rad2Deg;
+                Quaternion rotacao = Quaternion.Euler(0, 0, angulo);
+
+                // Instanciar a bala com a rotação calculada
+                GameObject bulletInstance = Instantiate(bullet, firePoint.position, rotacao);
+
+                // Definir a velocidade da bala
+                Rigidbody2D rbBullet = bulletInstance.GetComponent<Rigidbody2D>();
+                if (rbBullet != null)
+                {
+                    float bulletSpeed = 10f; // Você pode ajustar a velocidade conforme necessário
+                    rbBullet.velocity = direcao * bulletSpeed;
+                }
+                else
+                {
+                    Debug.LogError("O prefab da bala não possui um componente Rigidbody2D.");
+                }
+            }
+
+            ultimoDisparo = Time.time;
+        }
+    }
+
+    void StopShot()
+    {
+        if (anim != null)
+        {
+            anim.SetBool("IsFire", false);
+            anim.SetBool("IsRun", true);
         }
     }
 
