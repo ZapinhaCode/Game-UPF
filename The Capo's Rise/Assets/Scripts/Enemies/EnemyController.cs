@@ -236,6 +236,11 @@ public class EnemyController : MonoBehaviour
         life -= 1;
         if (life <= 0)
         {
+            if (GameScore.Instance != null)
+            {
+                GameScore.Instance.IncrementDeadEnemies();
+            }
+            
             Die();
         }
     }
@@ -244,7 +249,7 @@ public class EnemyController : MonoBehaviour
     {
         enabled = false; // Desativa o PlayerController
         anim.SetBool("IsDie", true);
-            
+        
         // Toca o som manualmente, verificando se o prefab de som contém um AudioSource
         if (deathSoundPrefab != null)
         {
