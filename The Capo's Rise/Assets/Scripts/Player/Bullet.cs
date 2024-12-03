@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         // Destroi a bala após 3 segundos para evitar acumulação
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 1.5f);
     }
 
     void Update()
@@ -19,22 +19,12 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector2.right * Speed * Time.deltaTime);
     }
 
-    // Método chamado quando a bala entra em um gatilho (trigger)
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Verifica se o objeto colidido possui a tag "Enemy"
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            // Tenta obter o componente EnemyHealth do inimigo
-            EnemyController enemyHealth = collision.GetComponent<EnemyController>();
-            if(enemyHealth != null)
-            {
-                // Aplica o dano ao inimigo
-                // enemyHealth.TakeDamage(damage);
-            }
+            Debug.Log("Acertou Inimigo");
 
-            // Destroi a bala após causar dano
-            Destroy(gameObject);
         }
     }
 }

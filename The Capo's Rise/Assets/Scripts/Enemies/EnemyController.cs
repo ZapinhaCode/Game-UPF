@@ -26,6 +26,9 @@ public class EnemyController : MonoBehaviour
     public float tempoEntreDisparos = 2.0f; // Tempo em segundos entre os disparos
     private float ultimoDisparo = 0f;
 
+    [Header("Configurações de Vida")]
+    public int Life = 1;
+
     private Rigidbody2D rb;
 
     void Start()
@@ -180,6 +183,44 @@ public class EnemyController : MonoBehaviour
         {
             anim.SetBool("IsFire", false);
             anim.SetBool("IsRun", true);
+        }
+    }
+    
+    public void TakeDamage(int damage)
+    {
+        Life -= damage;
+        if (Life <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        // Executa a animação de morte, efeitos visuais, etc.
+        Destroy(gameObject);
+    }
+    
+    void OnTriggerEnter2D(Collider2D colisao)
+    {
+        // Debug.Log("Acertou" + colisao.name);
+        if (colisao.CompareTag("PlayerBullet"))
+        {
+            anim.SetTrigger("TakeDamage");
+            TakeDamage(1); // Ajuste o valor do dano conforme necessário
+        }
+    }
+    
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        // Verifica se o objeto colidido possui a tag "Enemy"
+        if (collision.gameObject.CompareTag("PlayerBullet"))
+        {
+            Debug.Log("Acertou");
+
+            // Tenta obter o componente EnemyHealth do inimigo
+            Destroy(gameObject);
         }
     }
 

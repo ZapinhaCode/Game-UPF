@@ -4,72 +4,27 @@ using UnityEngine;
 
 public class BulletEnemy : MonoBehaviour
 {
-    public float velocidade = 15f; // Velocidade aumentada para balas mais rápidas
-    public float vidaUtil = 3f; // Tempo de vida do projétil em segundos
+    public float Speed = 10f;           // Velocidade da bala
+    public int damage = 1;             // Dano que a bala causa
 
-    private Vector2 direcao;
-    private Rigidbody2D rb;
-
-    void Awake()
+    void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        if (rb == null)
-        {
-            Debug.LogError("Rigidbody2D não encontrado no projétil.");
-        }
-    }
-
-    // Inicializa o projétil com uma direção
-    public void Inicializar(Vector2 _direcao)
-    {
-        direcao = _direcao.normalized;
-
-        // Orienta o projétil na direção do movimento
-        float angulo = Mathf.Atan2(direcao.y, direcao.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angulo));
-
-        // Define a velocidade do Rigidbody2D
-        if (rb != null)
-        {
-            rb.velocity = direcao * velocidade;
-        }
+        // Destroi a bala após 3 segundos para evitar acumulação
+        Destroy(gameObject, 1.5f);
     }
 
     void Update()
     {
-        // Diminui a vida útil
-        vidaUtil -= Time.deltaTime;
-        if (vidaUtil <= 0)
-        {
-            RetornarAoPool();
-        }
+        // Move a bala na direção para a direita baseada na rotação atual
+        transform.Translate(Vector2.right * Speed * Time.deltaTime);
     }
 
-    void OnTriggerEnter2D(Collider2D colisao)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Implementar lógica de dano ao jogador ou outros objetos
-        if (colisao.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            // Exemplo: Diminui a vida do jogador
-            // colisao.GetComponent<PlayerHealth>().Dano(1);
-            Debug.Log("Jogador atingido pelo projétil!");
-            RetornarAoPool();
-        }
-
-        // Destruir o projétil ao colidir com qualquer coisa, exceto inimigos
-        if (!colisao.CompareTag("Enemy"))
-        {
-            RetornarAoPool();
-        }
-    }
-
-    void RetornarAoPool()
-    {
-        // Reseta a vida útil e a velocidade
-        vidaUtil = 3f;
-        if (rb != null)
-        {
-            rb.velocity = Vector2.zero;
+            PlayerController playerController = collision.GetComponent<PlayerController>();
+            playerController.life--;
         }
     }
 }

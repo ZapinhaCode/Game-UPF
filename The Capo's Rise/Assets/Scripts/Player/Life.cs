@@ -12,11 +12,12 @@ public class Life : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+
             PlayerController playerController = collision.GetComponent<PlayerController>();
+            Debug.Log(playerController);
 
             // Aumenta a vida do jogador
             playerController.life++;
-            scoreLife = playerController.life;
 
             // Pega a posição do Player
             Vector3 playerPosition = collision.transform.position;

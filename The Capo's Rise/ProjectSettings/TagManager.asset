@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - BulletPlayer
   - Enemy
+  - EnemyBullet
+  - PlayerSkin
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - Ground
   - GroundHard
   - Enemy
-  - Player
+  - 
   - 
   - 
   - 
